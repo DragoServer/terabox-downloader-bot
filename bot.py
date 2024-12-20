@@ -39,7 +39,7 @@ Let's make your video experience even better!
         buttons=[
             [
                 Button.url("Channel ", url="https://t.me/DragoXServer"),
-                Button.url("Group ", url="https://t.me/dragoxserverchat"),
+                Button.url("Group ", url="https://t.me/DragoXServerChat"),
             ],
         ],
     )
@@ -132,8 +132,8 @@ async def start_token(m: Message):
             buttons=[
                 [
                     Button.url("DragoXServer", url="https://t.me/DragoXServer"),
-                    Button.url("dragoxserverchat",
-                               url="https://t.me/dragoxserverchat"),
+                    Button.url("DragoXServerChat",
+                               url="https://t.me/DragoXServerChat"),
                 ],
                 [
                     Button.url(
