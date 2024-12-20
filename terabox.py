@@ -14,7 +14,10 @@ def check_url_patterns(url):
         r"freeterabox\.com",
         r"www\.freeterabox\.com",
         r"1024tera\.com",
+        r"www\.1024tera\.com",
         r"4funbox\.co",
+        r"1024terabox\.com",
+        r"www\.1024terabox\.com",
         r"www\.4funbox\.com",
         r"mirrobox\.com",
         r"nephobox\.com",
@@ -29,6 +32,20 @@ def check_url_patterns(url):
         r"tibibox\.com",
         r"www\.tibibox\.com",
         r"www\.teraboxapp\.com",
+        r"www\.funpavo\.com",
+        r"www\.teraboxshare\.com",
+        r"www\.terafileshare\.com",
+        r"terafileshare\.com",
+        r"www\.teraboxlink\.com",
+        r"teraboxshare\.com",
+        r"www\.teraboxlink\.com",
+        r"teraboxshare\.com",
+        r"teraboxapp\.xyz",
+        r"www\.teraboxapp\.xyz",
+        r"teraboxlink\.com",
+        r"terasharelink\.com",
+        r"www\.terasharelink\.com",
+        r"funpavo\.com",
     ]
 
     for pattern in patterns:
@@ -97,71 +114,85 @@ def extract_surl_from_url(url: str) -> str | None:
     else:
         return False
 
-
 def get_data(url: str):
-    netloc = urlparse(url).netloc
-    url = url.replace(netloc, "1024terabox.com")
-    response = requests.get(
-        url,
-        data="",
+    r = requests.Session()
+    headersList = {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "en-US,en;q=0.9,hi;q=0.8",
+        "Connection": "keep-alive",
+        "Cookie": "TSID=pUt9K27Yeuqv9CslGlNQNPxzQYgJoRLL; browserid=J3sH4Ue97lNR9YjmcBJMjndE6CJOlJ_tAbxp7l0LR_-knQAWy4QOultORag=; lang=en; __bid_n=190a842d4d29e758004207; csrfToken=4bl8zhHwApiHdTG7B3FEOD5s; PANWEB=1; ndus=YfeaA3pteHuiNdFqXZT22UGKbwZruG7AhLriNU1H; ndut_fmt=67CA9B854E436314998352C0EE88F2A5374FF6C4AE780B9D3D44D0B1B5A08EDB",
+        "DNT": "1",
+        "Host": "www.terabox1024.com",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Sec-Fetch-User": "?1",
+        "Upgrade-Insecure-Requests": "1",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+        "sec-ch-ua": '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"Windows"',
+    }
+
+    payload = ""
+
+    response = r.get(url, data=payload, headers=headersList)
+    response = r.get(response.url, data=payload, headers=headersList)
+    default_thumbnail = find_between(response.text, 'og:image" content="', '"')
+    logid = find_between(response.text, "dp-logid=", "&")
+    jsToken = find_between(response.text, "fn%28%22", "%22%29")
+    bdstoken = find_between(response.text, 'bdstoken":"', '"')
+    shorturl = extract_surl_from_url(response.url)
+    if not shorturl:
+        return False
+
+    reqUrl = f"https://www.terabox1024.com/share/list?app_id=250528&web=1&channel=dubox&jsToken={jsToken}&page=1&num=20&by=name&order=asc&site_referer=&shorturl={shorturl}&root=1"
+
+    headersList = {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "en-US,en;q=0.9,hi;q=0.8",
+        "Connection": "keep-alive",
+        "Cookie": "TSID=pUt9K27Yeuqv9CslGlNQNPxzQYgJoRLL; browserid=J3sH4Ue97lNR9YjmcBJMjndE6CJOlJ_tAbxp7l0LR_-knQAWy4QOultORag=; lang=en; __bid_n=190a842d4d29e758004207; csrfToken=4bl8zhHwApiHdTG7B3FEOD5s; PANWEB=1; ndus=YfeaA3pteHuiNdFqXZT22UGKbwZruG7AhLriNU1H; ndut_fmt=67CA9B854E436314998352C0EE88F2A5374FF6C4AE780B9D3D44D0B1B5A08EDB",
+        "DNT": "1",
+        "Host": "www.terabox1024.com",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Sec-Fetch-User": "?1",
+        "Upgrade-Insecure-Requests": "1",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+        "sec-ch-ua": '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"Windows"',
+    }
+
+    payload = ""
+    response = r.get(
+        reqUrl,
+        data=payload,
+        headers=headersList,
     )
     if not response.status_code == 200:
         return False
-    default_thumbnail = find_between(response.text, 'og:image" content="', '"')
-
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0",
-        "Accept": "application/json, text/plain, */*",
-        "Accept-Language": "en-US,en;q=0.5",
-        "Content-Type": "application/json",
-        "Origin": "https://ytshorts.savetube.me",
-        "Alt-Used": "ytshorts.savetube.me",
-        "Sec-Fetch-Dest": "empty",
-        "Sec-Fetch-Mode": "cors",
-        "Sec-Fetch-Site": "same-origin",
-    }
-
-    response = requests.post(
-        "https://ytshorts.savetube.me/api/v1/terabox-downloader",
-        headers=headers,
-        json={"url": url},
-    )
-    if response.status_code != 200:
+    r_j = response.json()
+    if r_j["errno"]:
         return False
-    response = response.json()
-    responses = response.get("response", [])
-    if not responses:
+    if "list" not in r_j and not r_j["list"]:
         return False
-    resolutions = responses[0].get("resolutions", [])
-    if not resolutions:
-        return False
-    download = resolutions.get("Fast Download", "")
-    video = resolutions.get("HD Video", "")
-
-    response = requests.request(
-        "HEAD",
-        video,
-        data="",
-    )
-    content_length = response.headers.get("Content-Length", 0)
-    if not content_length:
-        content_length = None
-    idk = response.headers.get("content-disposition")
-    if idk:
-        fname = re.findall('filename="(.+)"', idk)
-    else:
-        fname = None
-    response = requests.head(
-        download,
-    )
+    list = r_j.get("list", [])[0]
+    response = r.head(r_j["list"][0]["dlink"], headers=headersList)
+    #print(list)
 
     direct_link = response.headers.get("location")
     data = {
-        "file_name": (fname[0] if fname else None),
-        "link": (video if video else None),
-        "direct_link": (direct_link if direct_link else download if list else None),
-        "thumb": (default_thumbnail if default_thumbnail else None),
-        "size": (get_formatted_size(int(content_length)) if content_length else None),
-        "sizebytes": (int(content_length) if content_length else None),
+        "file_name": list.get("server_filename"),
+        "link": list.get("dlink"),
+        "direct_link": direct_link,
+        "thumb": list.get("thumbs", {}).get("url3") or default_thumbnail,
+        "size": get_formatted_size(int(list["size"])),
+        "sizebytes": int(list["size"]),
     }
+
     return data
