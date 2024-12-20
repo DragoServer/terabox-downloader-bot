@@ -123,8 +123,8 @@ Size: **{self.data["size"]}**
                         ),
                     ],
                     [
-                        Button.url("Channel ", url="https://t.me/RoldexVerse"),
-                        Button.url("Group ", url="https://t.me/RoldexVerseChats"),
+                        Button.url("Channel ", url="https://t.me/DragoXServer"),
+                        Button.url("Group ", url="https://t.me/DragoXServerChat"),
                     ],
                 ],
             )
@@ -193,9 +193,9 @@ Size: **{self.data["size"]}**
                                 ),
                             ],
                             [
-                                Button.url("Channel ", url="https://t.me/RoldexVerse"),
+                                Button.url("Channel ", url="https://t.me/DragoXServer"),
                                 Button.url(
-                                    "Group ", url="https://t.me/RoldexVerseChats"
+                                    "Group ", url="https://t.me/DragoXServerChat"
                                 ),
                             ],
                         ],
