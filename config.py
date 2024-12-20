@@ -1,23 +1,19 @@
-API_ID = 123456  # api id
-API_HASH = "ABC-DEF1234ghIkl-zyx57W2v1u123ew11"  # api hash
+API_ID = 26427483
+API_HASH = "263a44e6d6e49383da08ccb75a2345c2"
 
-BOT_TOKEN = "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"  # bot token
+BOT_TOKEN = "6446177642:AAGsB0Jqt0VKSP-pZpVyAGQGZlvcQ_x0Tfs"
 
+HOST = "redis-16807.c301.ap-south-1-1.ec2.redns.redis-cloud.com"  
+PORT = 16807  
+PASSWORD = "nagYhtmLg71ntSAAjKORvf9VTlg3B66d" 
 
-# REDIS
-HOST = "localhost"  # redis host uri
-PORT = 6379  # redis port
-PASSWORD = ""  # redis password
+PRIVATE_CHAT_ID = -1001751192391 
 
-PRIVATE_CHAT_ID = -1001234567890  # CHAT WHERE YOU WANT TO STORE VIDEOS
-# COOKIE FOR AUTHENTICATION (get from chrome dev tools) ex: "PANWEB=1; csrfToken=;
-COOKIE = ""
-ADMINS = [1317173146]
+ADMINS = [1543260546]
 
 
-BOT_USERNAME = "teraboxdown_bot"
+BOT_USERNAME = "Dh_TeraDownloaderBot"
 
-# Force user to join this channel. (make sure you have promoted the bot on this chat.)
-FORCE_LINK = "@RoldexVerse"
+FORCE_LINK = "@DragoXServer"
 
-PUBLIC_EARN_API = ""  # https://publicearn.com/api
+PUBLIC_EARN_API = "55523d79283d3b8b4088eabf59f7386940da5d25" 
