@@ -30,7 +30,10 @@ def check_url_patterns(url: str) -> bool:
         r"freeterabox\.com",
         r"www\.freeterabox\.com",
         r"1024tera\.com",
+        r"www\.1024tera\.com",
         r"4funbox\.co",
+        r"1024terabox\.com",
+        r"www\.1024terabox\.com",
         r"www\.4funbox\.com",
         r"mirrobox\.com",
         r"nephobox\.com",
@@ -45,6 +48,20 @@ def check_url_patterns(url: str) -> bool:
         r"tibibox\.com",
         r"www\.tibibox\.com",
         r"www\.teraboxapp\.com",
+        r"www\.funpavo\.com",
+        r"www\.teraboxshare\.com",
+        r"www\.terafileshare\.com",
+        r"terafileshare\.com",
+        r"www\.teraboxlink\.com",
+        r"teraboxshare\.com",
+        r"www\.teraboxlink\.com",
+        r"teraboxshare\.com",
+        r"teraboxapp\.xyz",
+        r"www\.teraboxapp\.xyz",
+        r"teraboxlink\.com",
+        r"terasharelink\.com",
+        r"www\.terasharelink\.com",
+        r"funpavo\.com",
     ]
 
     for pattern in patterns:
@@ -252,7 +269,7 @@ def download_image_to_bytesio(url: str, filename: str) -> BytesIO | None:
 def remove_all_videos():
     current_directory = os.getcwd()
 
-    video_extensions = [".mp4", ".mkv", ".webm"]
+    video_extensions = [".mp4", ".avi", ".mkv", ".mov", ".flv", ".wmv"]
 
     try:
         for file_name in os.listdir(current_directory):
@@ -271,7 +288,7 @@ def generate_shortenedUrl(
     try:
         uid = str(uuid.uuid4())
         data = requests.get(
-            "https://publicearn.com/api",
+            "https://api.gplinks.com/api",
             params={
                 "api": PUBLIC_EARN_API,
                 "url": f"https://t.me/{BOT_USERNAME}?start=token_{uid}",
